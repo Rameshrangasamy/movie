@@ -156,8 +156,10 @@ app.get('/directors/:directorId/movies/', async (request, response) => {
     movie
     WHERE 
     director_id = ${directorId};`
-  const movies = await db.all(getMoviesQuery)
-  response.send(convertDbObjectToResponseObject(movies))
+  const moviesArray = await db.all(getMoviesQuery)
+  response.send(
+    moviesArray.map(eachMovie => ({movieName: eachMovie.movie_name})),
+  )
 })
 
-module.exports = app
+module.exports = app;
