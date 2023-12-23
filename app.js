@@ -156,7 +156,7 @@ app.get('/directors/:directorId/movies', async (request, response) => {
     movie
     WHERE 
     director_id = ${directorId};`
-  const movies = await db.get(getMoviesQuery)
+  const movies = await db.all(getMoviesQuery)
   response.send(convertDbObjectToResponseObject(movies))
 })
 
